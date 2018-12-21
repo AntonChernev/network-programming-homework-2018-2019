@@ -23,7 +23,9 @@ class HttpServer {
             HttpRequest request = new HttpRequest();
             request.init(connection.getInputStream());
 
-            HttpResponse response = new HttpResponse(request.getProtocol());
+            HttpHandler handler = new HttpHandler(request);
+            HttpResponse response = handler.process();
+
             response.send(connection.getOutputStream());
         } catch (Exception e) {
             e.printStackTrace();
