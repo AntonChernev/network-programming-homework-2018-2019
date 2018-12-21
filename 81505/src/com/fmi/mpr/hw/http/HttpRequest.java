@@ -96,6 +96,8 @@ class HttpRequest {
                 if(getString(bytes).equals(boundary)) {
                     break;
                 }
+                bytes.add((byte)13);
+                bytes.add((byte)10);
                 body.addAll(bytes);
             }
         }

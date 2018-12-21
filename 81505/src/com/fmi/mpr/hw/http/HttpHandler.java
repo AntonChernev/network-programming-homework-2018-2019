@@ -96,9 +96,11 @@ class HttpHandler {
         File file = new File(request.getHeaders().get("Custom-Filename"));
         FileOutputStream fileStream = new FileOutputStream(file);
         ArrayList<Byte> body = request.getBody();
-        for(Byte element: body) {
-            fileStream.write(element);
+        byte[] bytes = new byte[body.size()];
+        for(int i = 0; i < body.size(); i++) {
+            bytes[i] = body.get(i);
         }
+        fileStream.write(bytes);
         fileStream.close();
     }
 }
