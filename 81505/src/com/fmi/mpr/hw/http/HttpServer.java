@@ -20,6 +20,11 @@ class HttpServer {
             connection = server.accept();
             System.out.println("New connection: " + connection.getInetAddress());
 
+            HttpRequest request = new HttpRequest();
+            request.init(connection.getInputStream());
+
+            HttpResponse response = new HttpResponse(request.getProtocol());
+            response.send(connection.getOutputStream());
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
