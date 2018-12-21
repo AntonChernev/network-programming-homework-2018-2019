@@ -13,7 +13,7 @@ class HttpRequest {
     private ArrayList<Byte> body;
 
     private byte[] streamBuffer;
-    private int bufferIndex, bufferLegth, maxBufferLength = 4096;
+    private int bufferIndex, bufferLegth, maxBufferLength = 512 * 512;
 
     HttpRequest() {
         method = route = protocol = "";

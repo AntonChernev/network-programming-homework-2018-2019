@@ -35,6 +35,12 @@ class HttpHandler {
                 response.setStatusCode(404);
             }
         }
+        if(request.getMethod().equals("POST") && request.getRoute().equals("/upload")) {
+            saveFile();
+            sendFile("./uploaded.html");
+            setContentType("html");
+            response.setStatusCode(200);
+        }
 
         return response;
     }
@@ -84,5 +90,15 @@ class HttpHandler {
         }
 
         response.setBody(body);
+    }
+
+    private void saveFile() throws IOException {
+        File file = new File(request.getHeaders().get("Custom-Filename"));
+        FileOutputStream fileStream = new FileOutputStream(file);
+        ArrayList<Byte> body = request.getBody();
+        for(Byte element: body) {
+            fileStream.write(element);
+        }
+        fileStream.close();
     }
 }
